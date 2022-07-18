@@ -1,0 +1,30 @@
+<h1>Đăng nhập</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
+  <p>
+    <label for="email">Email: </label>
+    <input id="email" type="text" formControlName="email">
+  </p>
+  <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+    <div *ngIf="email?.errors?.['required']">
+      Email phải nhập
+    </div>
+    <div *ngIf="email?.errors?.['email']">
+      Email nhập phải đúng định dạng
+    </div>
+  </div>
+  <p>
+    <label for="password">Password: </label>
+    <input id="password" type="password" formControlName="password">
+  </p>
+  <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+    <div *ngIf="password?.errors?.['required']">
+      Mật khẩu phải nhập
+    </div>
+    <div *ngIf="password?.errors?.['minlength']">
+      Nhập nhiều hơn 6 ký tự
+    </div>
+  </div>
+  <p>
+    <button type="submit" [disabled]="!loginForm.valid">Đăng nhập</button>
+  </p>
+</form>

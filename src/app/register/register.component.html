@@ -1,0 +1,94 @@
+<h1>Đăng ký</h1>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+  <p>
+    <label for="email">Nhập Email: </label>
+    <input id="email" type="text" formControlName="email">
+  </p>
+  <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+    <div *ngIf="email?.errors?.['required']">
+      Email phải nhập
+    </div>
+    <div *ngIf="email?.errors?.['email']">
+      Email nhập phải đúng định dạng
+    </div>
+  </div>
+  <p>
+    <label for="password">Nhập mật khẩu: </label>
+    <input id="password" type="password"  formControlName="password">
+  </p>
+  <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+    <div *ngIf="password?.errors?.['required']">
+      Mật khẩu phải nhập
+    </div>
+    <div *ngIf="password?.errors?.['minlength']">
+      Nhập nhiều hơn 6 ký tự
+    </div>
+  </div>
+  <p>
+    <label for="confirmPassword">Nhập lại mật khẩu: </label>
+    <input id="confirmPassword" type="password"  formControlName="confirmPassword" (change)="checkConfirmPassword()">
+  </p>
+  <div style="visibility: hidden" id="abc">
+    Mật khẩu nhập lại không đúng
+  </div>
+  <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)">
+
+    <div *ngIf="confirmPassword?.errors?.['required']">
+      Mật khẩu phải nhập
+    </div>
+    <div *ngIf="confirmPassword?.errors?.['minlength']">
+      Nhập nhiều hơn 6 ký tự
+    </div>
+
+  </div>
+  <p>
+    <label for="country">Nhập quốc gia: </label>
+    <select id="country" formControlName="country">
+      <option [ngValue]="c.id" *ngFor="let c of countryList">
+        {{c.name}}
+      </option>
+    </select>
+  </p>
+  <div *ngIf="country?.invalid && (country?.dirty || country?.touched)">
+    <div *ngIf="country?.errors?.['required']">
+      Quốc gia phải chọn
+    </div>
+  </div>
+  <p>
+    <label for="age">Nhập tuổi: </label>
+    <input id="age" type="number" min="18" formControlName="age">
+  </p>
+  <div *ngIf="age?.invalid && (age?.dirty || age?.touched)">
+    <div *ngIf="age?.errors?.['required']">
+      tuổi phải điền
+    </div>
+    <div *ngIf="age?.errors?.['min']">
+      tuổi lớn hơn 18
+    </div>
+  </div>
+  <p>
+    <label>Nhập giới tính: </label><br>
+    <input name="gender" type="radio" value="female" formControlName="gender"> Nữ
+    <input name="gender" type="radio" value="male" formControlName="gender"> Nam
+  </p>
+  <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)">
+    <div *ngIf="gender?.errors?.['required']">
+      Giới tính phải chọn
+    </div>
+  </div>
+  <p>
+    <label for="phone">Nhập số điện thoại: </label>
+    <input id="phone" type="text" formControlName="phone">
+  </p>
+  <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
+    <div *ngIf="phone?.errors?.['required']">
+      Số điện thoại phải điền
+    </div>
+    <div *ngIf="phone?.errors?.['pattern']">
+      Không đúng định dạng
+    </div>
+  </div>
+  <p>
+    <button type="submit" [disabled]="!registerForm.valid">Đăng ký</button>
+  </p>
+</form>
